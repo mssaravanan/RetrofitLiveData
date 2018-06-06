@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/crd_wine_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_5sdp"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:elevation="@dimen/_8sdp">
+
+        <ImageView
+            android:id="@+id/img_wine"
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:scaleType="centerCrop"
+            android:background="@color/white"/>
+
+        <ProgressBar
+            android:id="@+id/progressBarSearchWine"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_gravity="center"
+            android:layout_height="@dimen/_25sdp" />
+
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/txt_wine_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/crd_wine_image"
+        android:layout_toLeftOf="@+id/rigth_arrow_name"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_5sdp"
+        android:text="Wine Name"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_14sdp"/>
+
+    <TextView
+        android:id="@+id/txt_winery_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/crd_wine_image"
+        android:layout_toLeftOf="@+id/rigth_arrow_name"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_5sdp"
+        android:layout_below="@+id/txt_wine_name"
+        android:text="Winery Name"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/ef_grey"
+        android:textSize="@dimen/_11sdp"/>
+
+    <TextView
+        android:id="@+id/txt_winery_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/crd_wine_image"
+        android:layout_toLeftOf="@+id/rigth_arrow_name"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_5sdp"
+        android:text="Winery Address"
+        android:layout_below="@+id/txt_winery_name"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/ef_grey"
+        android:textSize="@dimen/_11sdp"/>
+
+
+    <View
+        android:id="@+id/vw_divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="#9b9b9b"
+        android:layout_toRightOf="@+id/crd_wine_image"
+        android:layout_below="@+id/crd_wine_image"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_2sdp"/>
+
+    <ImageView
+        android:id="@+id/rigth_arrow_name"
+        android:layout_width="@dimen/_15sdp"
+        android:layout_height="@dimen/_15sdp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/_4sdp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_right_arrow" />
+
+</RelativeLayout>

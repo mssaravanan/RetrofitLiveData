@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="card_background_normal">@android:color/white</color>
+    <color name="card_background_pressed">#1f000000</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="ef_grey">#454545</color>
 </resources>

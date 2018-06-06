@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <layer-list>
+
+            <!-- Drop Shadow Stack -->
+            <item>
+                <shape>
+                    <padding android:left="1dp" android:right="1dp" android:top="1dp" />
+                    <solid android:color="#00CCCCCC" />
+                    <corners android:topLeftRadius="4dp" android:topRightRadius="4dp" />
+                </shape>
+            </item>
+            <item>
+                <shape>
+                    <padding android:left="1dp" android:right="1dp" android:top="1dp" />
+                    <solid android:color="#10CCCCCC" />
+                    <corners android:topLeftRadius="4dp" android:topRightRadius="4dp" />
+                </shape>
+            </item>
+            <item>
+                <shape>
+                    <padding android:left="1dp" android:right="1dp" android:top="1dp" />
+                    <solid android:color="#20CCCCCC" />
+                    <corners android:topLeftRadius="4dp" android:topRightRadius="4dp" />
+                </shape>
+            </item>
+            <item>
+                <shape>
+                    <padding android:left="1dp" android:right="1dp" android:top="1dp" />
+                    <solid android:color="#30CCCCCC" />
+                    <corners android:topLeftRadius="4dp" android:topRightRadius="4dp" />
+                </shape>
+            </item>
+            <item>
+                <shape>
+                    <padding android:left="1dp" android:right="1dp" android:top="1dp" />
+                    <solid android:color="#50CCCCCC" />
+                    <corners android:topLeftRadius="4dp" android:topRightRadius="4dp" />
+                </shape>
+            </item>
+
+            <!-- Background -->
+            <item>
+                <shape>
+                    <solid android:color="@color/card_background_pressed" />
+                    <corners android:topLeftRadius="4dp" android:topRightRadius="4dp" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+    <item>
+        <layer-list>
+            <!-- Drop Shadow Stack -->
+            <item>
+                <shape>
+                    <padding android:left="1dp" android:right="1dp" android:top="1dp" />
+                    <solid android:color="#00CCCCCC" />
+                    <corners android:topLeftRadius="4dp" android:topRightRadius="4dp" />
+                </shape>
+            </item>
+            <item>
+                <shape>
+                    <padding android:left="1dp" android:right="1dp" android:top="1dp" />
+                    <solid android:color="#10CCCCCC" />
+                    <corners android:topLeftRadius="4dp" android:topRightRadius="4dp" />
+                </shape>
+            </item>
+            <item>
+                <shape>
+                    <padding android:left="1dp" android:right="1dp" android:top="1dp" />
+                    <solid android:color="#20CCCCCC" />
+                    <corners android:topLeftRadius="4dp" android:topRightRadius="4dp" />
+                </shape>
+            </item>
+            <item>
+                <shape>
+                    <padding android:left="1dp" android:right="1dp" android:top="1dp" />
+                    <solid android:color="#30CCCCCC" />
+                    <corners android:topLeftRadius="4dp" android:topRightRadius="4dp" />
+                </shape>
+            </item>
+            <item>
+                <shape>
+                    <padding android:left="1dp" android:right="1dp" android:top="1dp" />
+                    <solid android:color="#50CCCCCC" />
+                    <corners android:topLeftRadius="4dp" android:topRightRadius="4dp" />
+                </shape>
+            </item>
+
+            <!-- Background -->
+            <item>
+                <shape>
+                    <solid android:color="@color/card_background_normal" />
+                    <corners android:topLeftRadius="4dp" android:topRightRadius="4dp" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>

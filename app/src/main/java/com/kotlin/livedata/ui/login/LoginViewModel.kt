@@ -3,7 +3,7 @@
  *
  *
  */
-package com.kotlin.livedata
+package com.kotlin.livedata.ui.login
 
 import com.kotlin.livedata.api.APIRepo
 import android.arch.core.util.Function
@@ -20,8 +20,8 @@ import okhttp3.ResponseBody
 
 open class LoginViewModel : ViewModel() {
 
-    private var gson: Gson = Gson()
-    private val _login = MutableLiveData<RequestBody>()
+    public var gson: Gson = Gson()
+    public val _login = MutableLiveData<RequestBody>()
 
     var APIRepo: APIRepo = APIRepo()
 
@@ -36,10 +36,28 @@ open class LoginViewModel : ViewModel() {
     }
 
     /**
-     * Variable return the user login details
+     * function return the user login details
      *
      * @return LiveData<Resource<LoginResponse>>
+     *
      */
+    inline fun <reified T> getResponse():LiveData<Resource<T>>{
+
+        var response: LiveData<Resource<ResponseBody>> = Transformations.switchMap(_login) { login ->
+            if (login == null) {
+                AbsentLiveData.create()
+            }
+            else {
+                APIRepo.loginRepo(login)
+            }
+        }
+        return Transformations.map(response, Function { input ->
+            convertJson(input)
+        })
+    }
+
+
+    //Direct call repo with LoginResponse
     var repositories: LiveData<Resource<LoginResponse>>? = null
         get() {
             var response: LiveData<Resource<ResponseBody>> = Transformations.switchMap(_login) { login ->
@@ -51,7 +69,7 @@ open class LoginViewModel : ViewModel() {
 
             }
             return Transformations.map(response, Function { input ->
-                convetJson(input)
+                convertJson(input)
             })
         }
 
@@ -62,12 +80,16 @@ open class LoginViewModel : ViewModel() {
      * Convert response body to json pojo
      *
      */
-    fun convetJson(response: Resource<ResponseBody>): Resource<LoginResponse> {
-        var loginResponse: LoginResponse? = null
+    inline fun <reified T> convertJson(response: Resource<ResponseBody>): Resource<T> {
+
         if (response.data != null) {
-            loginResponse = gson.fromJson(response.data.string(), LoginResponse::class.java)
+            if (T::class.java.simpleName.equals(LoginResponse::class.java.simpleName)) {
+                return Resource<LoginResponse>(response.status, gson.fromJson(response.data.string(), LoginResponse::class.java), response.message) as Resource<T>
+            }
         }
-        return Resource<LoginResponse>(response.status, loginResponse, response.message)
+
+        return null as Resource<T>
+
     }
 
 

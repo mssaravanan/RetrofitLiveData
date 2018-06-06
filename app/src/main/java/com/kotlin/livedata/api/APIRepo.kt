@@ -32,6 +32,8 @@ class APIRepo {
         }
     }
 
+
+
     /**
      * Call login API Service
      * @param requestBody
@@ -43,9 +45,12 @@ class APIRepo {
             return apiResponse
         }
         apiResponse.value = Resource.loading(null)
-        RetrofitFactory.createService(GithubService::class.java, Constants.BASE_URL).Post(Constants.POST_SIGN_IN_URL, requestBody).enqueue(ObjAPICallBack)
+        RetrofitFactory.createService(APIService::class.java, Constants.BASE_URL).Post(Constants.POST_SIGN_IN_URL, requestBody).enqueue(ObjAPICallBack)
         return apiResponse
     }
+
+
+
 
 
 }

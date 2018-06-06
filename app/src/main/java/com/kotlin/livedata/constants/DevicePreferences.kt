@@ -96,14 +96,9 @@ object DevicePreferences {
      * @param data     empty string to specify the key belongs to string data
      * @return returns true if the key exists, else false
      */
-    fun isKeyExists(mContext: Context, key: String, data: String): Boolean {
+    fun isContainKey(mContext: Context, key: String): Boolean {
         val prefs = DevicePreferences[mContext]
-        val value = prefs.getString(key, null)
-        return if (value == null) {
-            false
-        } else {
-            true
-        }
+        return prefs.contains(key)
     }
 
     /**
