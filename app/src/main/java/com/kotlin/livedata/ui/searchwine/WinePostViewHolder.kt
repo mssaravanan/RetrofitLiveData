@@ -16,6 +16,7 @@
 
 package com.kotlin.livedata.ui.searchwine
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
@@ -38,8 +39,13 @@ import com.kotlin.livedata.model.SearchWine
 /**
  * A RecyclerView ViewHolder that displays a reddit post.
  */
-class WinePostViewHolder(view: View,private val glide: RequestManager)
+class WinePostViewHolder(view: View,private val glide: RequestManager,context: SearchActivity?)
     : RecyclerView.ViewHolder(view) {
+
+
+   /* constructor(view: View,glide: RequestManager,str:String) : this(view,glide,context = null) {
+
+    }*/
 
     private val title: TextView = view.findViewById(R.id.txt_wine_name)
     private val subtitle: TextView = view.findViewById(R.id.txt_winery_name)
@@ -49,7 +55,7 @@ class WinePostViewHolder(view: View,private val glide: RequestManager)
     private var post : SearchWine.SearchWineData? = null
     init {
         view.setOnClickListener {
-
+            context?.onItemClick(post)
         }
     }
 
@@ -87,7 +93,7 @@ class WinePostViewHolder(view: View,private val glide: RequestManager)
         fun create(parent: ViewGroup,glide:RequestManager): WinePostViewHolder {
             val view = LayoutInflater.from(parent.context)
                     .inflate(R.layout.row_search_wine_item, parent, false)
-            return WinePostViewHolder(view,glide)
+            return WinePostViewHolder(view,glide,parent.context as SearchActivity)
         }
     }
 

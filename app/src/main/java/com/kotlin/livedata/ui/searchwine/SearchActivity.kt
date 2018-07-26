@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
+import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.kotlin.livedata.R
 import com.kotlin.livedata.api.paging.NetworkState
@@ -17,6 +18,7 @@ import com.kotlin.livedata.api.paging.ServiceLocator
 import com.kotlin.livedata.constants.DevicePreferences
 import com.kotlin.livedata.model.SearchData
 import com.kotlin.livedata.model.SearchWine
+import com.kotlin.livedata.ui.winedetail.WineDetailFragment
 import kotlinx.android.synthetic.main.activity_search_wine.*
 
 
@@ -85,6 +87,19 @@ class SearchActivity:AppCompatActivity() {
     }
 
 
+    fun onItemClick(post:SearchWine.SearchWineData?){
+        Toast.makeText(this@SearchActivity,"xfsdfsdsd",Toast.LENGTH_LONG).show()
+        var wineDetailFragment=WineDetailFragment()
+        var bundle=Bundle()
+        bundle.putInt("WineId",post?.wineId?:0)
+        bundle.putString("RequestFrom","Wine")
+        bundle.putInt("UserId", DevicePreferences.getInt(this@SearchActivity,"userId"))
+        wineDetailFragment.arguments=bundle
+        supportFragmentManager.beginTransaction().replace(R.id.fragmentHolder,wineDetailFragment,"wineDetail")
+                .commit()
+    }
+
+
     //Recycler view Adapter
     private fun initAdapter() {
         val glide = Glide.with(this)
@@ -118,6 +133,17 @@ class SearchActivity:AppCompatActivity() {
         swipe_refresh.setOnRefreshListener {
             model.refresh()
         }
+    }
+
+    override fun onBackPressed() {
+       // var fragment = supportFragmentManager.findFragmentByTag("wineDetail")
+        if(supportFragmentManager.fragments.size>0){
+            var fragment = supportFragmentManager.fragments.get(0)
+            supportFragmentManager.beginTransaction().remove(fragment).commit()
+        }else{
+            super.onBackPressed()
+        }
+
     }
 }
 

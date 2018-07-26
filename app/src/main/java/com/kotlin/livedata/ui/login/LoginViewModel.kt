@@ -6,7 +6,6 @@
 package com.kotlin.livedata.ui.login
 
 import com.kotlin.livedata.api.APIRepo
-import android.arch.core.util.Function
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
@@ -15,13 +14,14 @@ import com.google.gson.Gson
 import com.kotlin.livedata.model.LoginResponse
 import com.kotlin.livedata.util.AbsentLiveData
 import com.kotlin.livedata.util.Resource
+import com.kotlin.livedata.viewmodel.APIRequestData
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
 
 open class LoginViewModel : ViewModel() {
 
     public var gson: Gson = Gson()
-    public val _login = MutableLiveData<RequestBody>()
+    val _login = MutableLiveData<APIRequestData>()
 
     var APIRepo: APIRepo = APIRepo()
 
@@ -30,8 +30,8 @@ open class LoginViewModel : ViewModel() {
      * Directly Call the repo methods
      *
      */
-    fun callAPI(login: RequestBody): LiveData<Resource<ResponseBody>> {
-        var liveData: LiveData<Resource<ResponseBody>> = APIRepo.loginRepo(login)
+    fun callAPI(login: APIRequestData): LiveData<Resource<ResponseBody>> {
+        var liveData: LiveData<Resource<ResponseBody>> = APIRepo.postAPIRepo(login)
         return liveData
     }
 
@@ -43,34 +43,31 @@ open class LoginViewModel : ViewModel() {
      */
     inline fun <reified T> getResponse():LiveData<Resource<T>>{
 
-        var response: LiveData<Resource<ResponseBody>> = Transformations.switchMap(_login) { login ->
+        var response: LiveData<Resource<T>> = Transformations.switchMap(_login) { login ->
             if (login == null) {
                 AbsentLiveData.create()
             }
             else {
-                APIRepo.loginRepo(login)
+                APIRepo.postAPIRepo<T>(login)
             }
         }
-        return Transformations.map(response, Function { input ->
-            convertJson(input)
-        })
+        return  response
+
     }
 
 
     //Direct call repo with LoginResponse
     var repositories: LiveData<Resource<LoginResponse>>? = null
         get() {
-            var response: LiveData<Resource<ResponseBody>> = Transformations.switchMap(_login) { login ->
+            var response: LiveData<Resource<LoginResponse>> = Transformations.switchMap(_login) { login ->
                 if (login == null) {
                     AbsentLiveData.create()
                 } else {
-                    APIRepo.loginRepo(login)
+                    APIRepo.postAPIRepo<LoginResponse>(login)
                 }
 
             }
-            return Transformations.map(response, Function { input ->
-                convertJson(input)
-            })
+            return response;
         }
 
 
@@ -98,11 +95,10 @@ open class LoginViewModel : ViewModel() {
      *
      * @param login
      */
-    fun setLogin(login: RequestBody?) {
+    fun setLogin(login: APIRequestData?) {
         if (_login.value != login) {
             _login.value = login
         }
-
     }
 
     /**
