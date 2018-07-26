@@ -8,32 +8,28 @@ import com.kotlin.livedata.api.APIRepo
 import com.kotlin.livedata.util.AbsentLiveData
 import com.kotlin.livedata.util.Resource
 import okhttp3.RequestBody
+import android.arch.lifecycle.MediatorLiveData
+
+
 
 open class APIViewModel:ViewModel() {
 
     val _requestBody = MutableLiveData<APIRequestData>()
 
+
     var APIRepo: APIRepo = APIRepo()
 
 
 
-    /**
-     * function return the user login details
-     *
-     * @return LiveData<Resource<LoginResponse>>
-     *
-     */
     inline fun <reified T> getResponse(): LiveData<Resource<T>> {
 
-        var response: LiveData<Resource<T>> = Transformations.switchMap(_requestBody) { _requestBody ->
+        return Transformations.switchMap(_requestBody) { _requestBody ->
             if (_requestBody == null) {
                 AbsentLiveData.create()
-            }
-            else {
+            } else {
                 APIRepo.postAPIRepo<T>(_requestBody)
             }
         }
-        return  response
 
     }
 
