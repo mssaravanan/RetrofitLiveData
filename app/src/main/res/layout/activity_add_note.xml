@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="addnote"
+            type="com.kotlin.livedata.ui.winenote.AddNoteActivity">
+        </variable>
+
+        <import type="android.widget.EditText"></import>
+
+        <variable
+            name="addnotedata"
+            type="com.kotlin.livedata.model.AddNoteData"></variable>
+
+    </data>
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:text="@{addnotedata.noteData}"
+        android:gravity="top|left"
+        android:hint="Enter Note"
+        android:inputType="text"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <!--android:onClick="@{editText2.getText().toString().isEmpty()?editText2.setError("dddd"):()}"-->
+
+    <!--android:onClick="@{(view) -> addnote.onSubmitNote(view,addnotedata)}"-->
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:text="Add Note"
+        android:onClick="@{(view) -> addnote.onSubmitNoteString(view,editText2.getText().toString())}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</android.support.constraint.ConstraintLayout>
+
+</layout>

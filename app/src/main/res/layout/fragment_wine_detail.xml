@@ -6,11 +6,15 @@
     <data>
         <variable name="wineHistoryData" type="com.kotlin.livedata.model.WineHistoryResponse.Data"/>
         <import type="com.kotlin.livedata.util.Status"></import>
+        <import type="android.view.View" />
         <variable
             name="resource"
             type="com.kotlin.livedata.util.Resource"/>
         <variable name="retryCallback"
             type="com.kotlin.livedata.util.RetryCallBack"/>
+        <variable
+            name="wineDetailFragment"
+            type="com.kotlin.livedata.ui.winedetail.WineDetailFragment"></variable>
     </data>
 
 <FrameLayout
@@ -45,7 +49,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="TextView"
-            resourcesVisibleGone="@{resource.status==Status.ERROR}"
+            android:visibility="@{resource.status==Status.ERROR ? View.VISIBLE: View.GONE}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/progressBarD" />
@@ -82,7 +86,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="@{wineHistoryData.brand}"
+                android:text="@{wineHistoryData.brand ?? wineHistoryData.wineryName}"
                 android:textColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -177,6 +181,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:text="Add Note"
+                android:onClick="@{(view)->wineDetailFragment.addNote(view)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
