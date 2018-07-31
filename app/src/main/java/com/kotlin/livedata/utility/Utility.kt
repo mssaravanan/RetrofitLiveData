@@ -28,11 +28,12 @@ public object Utility {
         val bluetooth = connec
                 .getNetworkInfo(ConnectivityManager.TYPE_BLUETOOTH)
 
+
         if (wifi.isConnected) {
             return true
         } else if (mobile.isConnected) {
             return true
-        } else if (bluetooth.isConnected) {
+        } else if (bluetooth!=null&&bluetooth.isConnected) {
             return true
         } else if (!mobile.isConnected) {
             return false

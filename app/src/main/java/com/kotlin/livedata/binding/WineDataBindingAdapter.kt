@@ -20,23 +20,27 @@ fun showHide(view: View, show: Boolean) {
 @BindingAdapter(value = ["imageUrl","progressView"],requireAll = true)
 fun imageURL(view: ImageView, url: String?,progressBar: ProgressBar) {
 
-    url.isNullOrEmpty().let {
-        if(!it){
-            Glide.with(view.context).load(url).listener(object :RequestListener<Drawable>{
-                override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                    progressBar.visibility=View.GONE
-                    e?.printStackTrace()
-                    return false
-                }
+    url?.run {
+        Glide.with(view.context).load(url).listener(object :RequestListener<Drawable>{
+            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
+                progressBar.visibility=View.GONE
+                e?.printStackTrace()
+                return false
+            }
 
-                override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                    progressBar.visibility=View.GONE
-                    return false
-                }
+            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
+                progressBar.visibility=View.GONE
+                return false
+            }
 
-            }).into(view)
-        }
+        }).into(view)
     }
+
+   /* url.isNullOrEmpty().let {
+        if(!it){
+
+        }
+    }*/
 
 }
 

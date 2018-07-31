@@ -162,9 +162,11 @@ open class MultiAPIViewModel:ViewModel() {
      */
 
     fun retry() {
-
         _requestBody.value?.let {
-            _requestBody.value = it
+             var list=ArrayList<APIRequestData>()
+             list.addAll(it)
+            _requestBody.value =null
+            _requestBody.value = list
         }
 
     }

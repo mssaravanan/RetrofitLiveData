@@ -138,7 +138,7 @@ class SearchActivity:AppCompatActivity() {
     override fun onBackPressed() {
        // var fragment = supportFragmentManager.findFragmentByTag("wineDetail")
         if(supportFragmentManager.fragments.size>0){
-            var fragment = supportFragmentManager.fragments.get(0)
+            var fragment = supportFragmentManager.fragments.get(supportFragmentManager.fragments.size-1)
             supportFragmentManager.beginTransaction().remove(fragment).commit()
         }else{
             super.onBackPressed()

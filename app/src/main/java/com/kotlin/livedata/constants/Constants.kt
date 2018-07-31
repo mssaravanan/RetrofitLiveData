@@ -119,6 +119,12 @@ object Constants {
     val POST_PHOTOS_SEARCH_LIST_URL = "KAL5Wine/GetPhotoListBySearchText"
     val POST_PHOTOS_SEARCH_LIST_REQUEST = 35
 
+    val GET_WINE_NOTES_LIST_URL = "KAL5Wine/GetWineNotes"
+    val GET_WINE_NOTES_LIST_REQUEST = 401
+
+    val POST_WINE_NOTES = "KAL5Wine/AddNotesToWine"
+    val POST_WINE_NOTES_REQUEST = 39
+
 
     val USER_FULL_NAME = "userFullName"
     val USER_EMAIL = "userEmail"

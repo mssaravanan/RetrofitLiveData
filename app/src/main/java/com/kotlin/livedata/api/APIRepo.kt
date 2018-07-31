@@ -5,7 +5,9 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 
 import com.kotlin.livedata.constants.Constants
+import com.kotlin.livedata.model.AddNoteResponse
 import com.kotlin.livedata.model.LoginResponse
+import com.kotlin.livedata.model.NotesResponse
 import com.kotlin.livedata.model.WineHistoryResponse
 import com.kotlin.livedata.util.Resource
 import com.kotlin.livedata.utility.Utility
@@ -64,6 +66,11 @@ class APIRepo {
                 request= RetrofitFactory.createService(APIService::class.java, Constants.BASE_URL).postLogin(Constants.POST_SIGN_IN_URL, apiRequestData.requestBody) as Call<T>
             WineHistoryResponse::class.java.simpleName ->
                 request = RetrofitFactory.createService(APIService::class.java, Constants.BASE_URL).postWineDetail(Constants.POST_VIEW_WINE_HISTORY_URL, apiRequestData.requestBody,apiRequestData.header) as Call<T>
+            NotesResponse::class.java.simpleName->
+                request = RetrofitFactory.createService(APIService::class.java, Constants.BASE_URL).getWineNotes(Constants.GET_WINE_NOTES_LIST_URL, apiRequestData.requestBody,apiRequestData.header) as Call<T>
+
+            AddNoteResponse::class.java.simpleName->
+                request = RetrofitFactory.createService(APIService::class.java, Constants.BASE_URL).postWineNotes(Constants.POST_WINE_NOTES, apiRequestData.requestBody,apiRequestData.header) as Call<T>
             else->
                 request = RetrofitFactory.createService(APIService::class.java, Constants.BASE_URL).PostSearchWine(Constants.POST_SEARCH_WINE_URL, apiRequestData.requestBody) as Call<T>
         }
